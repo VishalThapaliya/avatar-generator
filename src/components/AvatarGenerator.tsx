@@ -1,3 +1,4 @@
+import AvatarGeneratorInputs from "./AvatarGeneratorInputs";
 import AvatarGeneratorHeader from "./AvatarGeneratorHeader";
 import LoadingAvatar from "./LoadingAvatar";
 
@@ -13,6 +14,10 @@ const AvatarGenerator = () => {
 
         <div className="flex flex-col items-center">
             <LoadingAvatar />
+
+            <div className="w-full max-w-2xl mx-auto">
+              <AvatarGeneratorInputs />
+            </div>
         </div>
       </div>
     </section>
