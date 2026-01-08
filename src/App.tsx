@@ -1,34 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import AvatarGenerator from './components/AvatarGenerator';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <section className='min-h-screen flex items-center justify-center p-6 md:p-12 relative overflow-hidden bg-[#020617]'>
+      <div className="absolute top-[-10%] left-[-5%] w-[60%] h-[60%] bg-indigo-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-5%] w-[60%] h-[60%] bg-slate-900/30 blur-[120px] rounded-full pointer-events-none"></div>
+      
+      <div className="w-full max-w-4xl glass-card rounded-[2.5rem] p-8 md:p-16 text-center relative z-10 border border-white/5">
+        <AvatarGenerator />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </section>
   )
 }
 
