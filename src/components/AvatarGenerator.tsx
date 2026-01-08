@@ -1,6 +1,7 @@
 import AvatarGeneratorInputs from "./AvatarGeneratorInputs";
 import AvatarGeneratorHeader from "./AvatarGeneratorHeader";
 import LoadingAvatar from "./LoadingAvatar";
+import AvatarGeneratorButtons from "./AvatarGeneratorButtons";
 
 const AvatarGenerator = () => {
 
@@ -17,6 +18,7 @@ const AvatarGenerator = () => {
 
             <div className="w-full max-w-2xl mx-auto">
               <AvatarGeneratorInputs />
+              <AvatarGeneratorButtons />
             </div>
         </div>
       </div>

@@ -71,13 +71,43 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
         setLoadingStatus('');
     }, [imgType, getUrl, isGenerating]);
 
+    const copyUrl = useCallback(() => {
+        if(!imgSrc) return;
+
+        navigator.clipboard.writeText(imgSrc)
+            .then(() => addToast('Direct link copied!', 'success'))
+            .catch(() => addToast('Clipboard error', 'error'));
+    }, [imgSrc, addToast]);
+
+    const downloadAvatar = useCallback(async () => {
+        if(!imgSrc) return;
+
+        try {
+            addToast('Preparing download package...', 'info');
+            const response = await fetch(imgSrc);
+            const blob = await response.blob();
+            console.log("Blob: ", blob);
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `avatar=${seed}.png`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            addToast('Asset saved successfully', 'success');
+        } catch (err) {
+            window.open(imgSrc, '_blank');
+        }
+    }, [imgSrc, seed, addToast]);
+
     useEffect(() => {
         setImgSrc(getUrl(imgType, seed));
     },[imgType, seed, getUrl]);
     
     
     const value: AvatarContextState = {
-        imgSrc, imgType, seed, isGenerating, loadingStatus, setImgType, setSeed, generateAvatar
+        imgSrc, imgType, seed, isGenerating, loadingStatus, setImgType, setSeed, generateAvatar, copyUrl, downloadAvatar
     };
 
     return (
