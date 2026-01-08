@@ -28,9 +28,9 @@ interface AvatarProviderProps {
 
 export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToast }) => {
     const [imgType, setImgType] = useState<AvatarStyle>('portrait_male');
-    const [isGenerating, setIsGenerating] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(true);
     const [seed, setSeed] = useState<string>('avatarflow');
-    const [loadingStatus, setLoadingStatus] = useStatus('');
+    const [loadingStatus, setLoadingStatus] = useState('');
     const [imgSrc, setImgSrc] = useState<string>('');
 
     // get url for avatar generation
@@ -69,7 +69,7 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
         setImgSrc(newUrl);
         setIsGenerating(false);
         setLoadingStatus('');
-    });
+    }, [imgType, getUrl, isGenerating]);
 
     useEffect(() => {
         setImgSrc(getUrl(imgType, seed));
