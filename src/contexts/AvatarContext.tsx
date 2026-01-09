@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { type AvatarStyle, type AvatarContextState, type ToastMessage } from "../types/types";
+import { type AvatarStyle, type AvatarContextState, type ToastMessage, type HistoryItem } from "../types/types";
 import { AVATAR_DATA } from "../data/constants";
 
 const AvatarContext = createContext<AvatarContextState | undefined>(undefined);
@@ -32,6 +32,10 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
     const [seed, setSeed] = useState<string>('avatarflow');
     const [loadingStatus, setLoadingStatus] = useState('');
     const [imgSrc, setImgSrc] = useState<string>('');
+    const [history, setHistory] = useState<HistoryItem[]>(() => {
+        const saved = localStorage.getItem('avatar_history');
+        return saved ? JSON.parse(saved) : [];
+    })
 
     // get url for avatar generation
     const getUrl = useCallback((style: AvatarStyle, currentSeed: string) => {
@@ -69,6 +73,20 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
         setImgSrc(newUrl);
         setIsGenerating(false);
         setLoadingStatus('');
+
+        const newItem: HistoryItem = {
+            id: Date.now().toString(),
+            url: newUrl,
+            style: imgType,
+            seed: newSeed
+        };
+
+        setHistory(prev => {
+            const updated = [newItem, ...prev.filter(i => i.url !== newUrl)].slice(0, 10);
+            localStorage.setItem('avatar_history', JSON.stringify(updated));
+            return updated;
+        })
+
     }, [imgType, getUrl, isGenerating]);
 
     const copyUrl = useCallback(() => {
@@ -101,13 +119,26 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
         }
     }, [imgSrc, seed, addToast]);
 
+    const restoreHistory = useCallback((item: HistoryItem) => {
+        setImgType(item.style);
+        setSeed(item.seed);
+        setImgSrc(item.url);
+        addToast('Restored from database', 'info');
+    }, [addToast]);
+
+    const clearHistory = useCallback(() => {
+        setHistory([]);
+        localStorage.removeItem('avatar_history');
+        addToast('Archives cleared', 'info');
+    }, [addToast]);
+
     useEffect(() => {
         setImgSrc(getUrl(imgType, seed));
     },[imgType, seed, getUrl]);
     
     
     const value: AvatarContextState = {
-        imgSrc, imgType, seed, isGenerating, loadingStatus, setImgType, setSeed, generateAvatar, copyUrl, downloadAvatar
+        imgSrc, imgType, seed, isGenerating, loadingStatus, setImgType, setSeed, generateAvatar, copyUrl, downloadAvatar, history, restoreHistory, clearHistory
     };
 
     return (
