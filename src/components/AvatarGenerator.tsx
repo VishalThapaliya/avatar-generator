@@ -3,11 +3,12 @@ import AvatarGeneratorHeader from "./AvatarGeneratorHeader";
 import LoadingAvatar from "./LoadingAvatar";
 import AvatarGeneratorButtons from "./AvatarGeneratorButtons";
 import RecentlyGeneratedAvatars from "./RecentlyGeneratedAvatars";
+import AvatarGeneratorFooter from "./AvatarGeneratorFooter";
 
 const AvatarGenerator = () => {
 
   return (
-    <section className="min-h-screen flex items-center justify-center p-6 md:p-12 relative overflow-hidden bg-[#020617]">
+    <section className="min-h-screen flex items-center justify-center p-6 md:p-12 md:pb-2 relative overflow-hidden bg-[#020617]">
       <div className="absolute top-[-10%] left-[-5%] w-[60%] h-[60%] bg-indigo-900/20 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-5%] w-[60%] h-[60%] bg-slate-900/30 blur-[120px] rounded-full pointer-events-none"></div>
       
@@ -23,6 +24,8 @@ const AvatarGenerator = () => {
               <RecentlyGeneratedAvatars />
             </div>
         </div>
+
+        <AvatarGeneratorFooter />
       </div>
     </section>
   )

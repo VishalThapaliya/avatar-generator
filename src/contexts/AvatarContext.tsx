@@ -82,7 +82,7 @@ export const AvatarProvider: React.FC<AvatarProviderProps> = ({ children, addToa
         };
 
         setHistory(prev => {
-            const updated = [newItem, ...prev.filter(i => i.url !== newUrl)].slice(0, 10);
+            const updated = [newItem, ...prev.filter(i => i.url !== newUrl)].slice(0, 8);
             localStorage.setItem('avatar_history', JSON.stringify(updated));
             return updated;
         })
