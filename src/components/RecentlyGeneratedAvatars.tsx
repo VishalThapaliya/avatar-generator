@@ -30,7 +30,7 @@ const RecentlyGeneratedAvatars: React.FC = () => {
                     className="group relative w-12 h-12 md:w-16 md:h-16 rounded-2xl overflow-hidden border border-white/5 hover:border-indigo-500/50 transition-all hover:scale-105 active:scale-90 disabled:opacity-20 cursor-pointer"
                 >
                     <img src={item.url} alt="History" className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"/>
-                    <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100 " />
+                    <div className="absolute inset-0 bg-indigo-500/10 opacity-0 group-hover:opacity-100" />
                 </button>
             ))}
         </div>
