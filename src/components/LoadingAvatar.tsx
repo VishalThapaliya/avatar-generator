@@ -3,14 +3,14 @@ import { useAvatarContext } from "../contexts/AvatarContext";
 const LoadingAvatar = () => {
   const { imgSrc, isGenerating, loadingStatus } = useAvatarContext();
   return (
-    <div className="relative mx-auto w-52 h-52 md:w-64 md:h-64 mb-16">
+    <div className="relative mx-auto w-35 h-35 md:w-45 md:h-45 mb-8">
       {/* dynamic progress ring will display during avatar generation */}
       {isGenerating && (
-        <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] -rotate-90 pointer-events-none">
+        <svg className="absolute -inset-4 w-[calc(100%+40px)] h-[calc(100%+40px)] -rotate-90 pointer-events-none">
           <circle
             cx="50%"
             cy="50%"
-            r="48%"
+            r="42%"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -19,7 +19,7 @@ const LoadingAvatar = () => {
           <circle
             cx="50%"
             cy="50%"
-            r="48%"
+            r="42%"
             fill="none"
             stroke="currentColor"
             strokeWidth="3"
@@ -30,7 +30,7 @@ const LoadingAvatar = () => {
       )}
 
       <div
-        className={`relative w-full h-full rounded-[3.5rem] border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a1a] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        className={`relative w-full h-full rounded-[3rem] border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a1a] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           isGenerating ? "scale-90 brightness-50 contrast-125" : "scale-100"
         }`}
       >
