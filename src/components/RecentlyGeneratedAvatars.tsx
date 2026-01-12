@@ -2,9 +2,7 @@ import React from 'react'
 import { useAvatarContext } from '../contexts/AvatarContext'
 
 const RecentlyGeneratedAvatars: React.FC = () => {
-    const { history, restoreHistory, clearHistory, isGenerating} = useAvatarContext();
-
-    console.log("history: ", history);
+    const { history, restoreHistory, clearHistory, isGenerating} = useAvatarContext();    
     
     if(history.length === 0) return null;
 
